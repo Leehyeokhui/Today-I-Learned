@@ -3,5 +3,5 @@
 
 1. java 기초
 2. sql 기초
-3. java와 sql 연동
-4. Web programming
+3. java와 sql 연동(오라클)
+4. Web programming(jsp, html, javascript)
