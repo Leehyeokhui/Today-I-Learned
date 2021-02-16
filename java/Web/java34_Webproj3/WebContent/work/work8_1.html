@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>new Object()로 객체 생성</title>
+<script>
+	function sales(num) { // num만큼 할인
+		this.price -= num;
+		return num;
+	}
+	
+	function checkwriter() {
+		return this.writer;
+	}
+
+	// 책 객체 만들기
+	var book  = new Object();
+	book.writer = "황기태"; // 저자
+	book.price = 10000; // 가격
+	book.title = "안녕"; // 제목
+	book.sales = sales;
+	book.checkwriter = checkwriter;
+</script>
+</head>
+<body>
+<script>
+	book.sales(1000);
+	document.write("책 할인가격 : " + book.price + "<br>");
+	document.write("책 저자 : " + book.checkwriter());
+</script>
+</body>
+</html>
