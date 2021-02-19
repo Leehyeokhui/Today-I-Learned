@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>setInterval()</h3>
+<hr>
+현재 시간 : <span id="times"></span>
+<hr>
+<button onclick="clearInterval(time)">멈추기</button>
+<script>
+var time = setInterval(myTimer, 1000);
+
+function myTimer(){
+	var date = new Date();
+	document.getElementById("times").innerHTML = date.toLocaleTimeString();
+}
+</script>
+</body>
+</html>
