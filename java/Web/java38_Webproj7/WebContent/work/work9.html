@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>성탄 카드</h3>
+<hr>
+<canvas id="myCanvas" style="background-color:white"
+	 width="300" height="400"></canvas>
+<script>
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+	
+	//틀
+	context.beginPath(); // 빈 경로 구성
+	context.rect(0,0,300,400);
+	context.lineWidth = 15;
+	context.strokeStyle="#C4E8E5"; // 선의 색
+	context.stroke(); // 사각형을 캔버스에 그린다
+	
+	context.beginPath(); // 빈 경로 구성
+	context.rect(0,0,300,100);
+	context.strokeStyle="#C4E8E5"; // 선의 색
+	context.fillStyle="#C4E8E5";
+	context.fill();
+	context.stroke(); // 사각형을 캔버스에 그린다
+	
+	//텍스트
+	context.font = "italic 30px forte";
+    context.strokeStyle = "#F4EBEB";
+	context.lineWidth = 2;
+	context.textAlign = "center";
+	context.strokeText("Merry ChristMas", 150, 60);
+	context.fillStyle = "#F4EBEB";
+	context.textAlign = "center";
+	context.fillText("Merry ChristMas", 150, 60);
+	
+	
+	//눈사람
+	context.beginPath(); 
+	context.strokeStyle="#A6CDD0";
+	context.arc(150, 175, 45, Math.PI/4+0.25,2/3*Math.PI+0.15, true); 
+	context.stroke(); 
+
+	context.beginPath(); 
+	context.strokeStyle="#A6CDD0";
+	context.arc(150, 290, 83, 4/3*Math.PI+0.2, 5/3*Math.PI-0.2, true); 
+	context.stroke(); 
+	
+	context.beginPath(); 
+	context.strokeStyle="black";
+	context.arc(130, 160, 3, 0, 2*Math.PI, true); 
+	context.fillStyle='black';
+	context.fill();
+	context.stroke(); 
+	
+	context.beginPath(); 
+	context.strokeStyle="black";
+	context.arc(170, 160, 3, 0, 2*Math.PI, true); 
+	context.fillStyle='black';
+	context.fill();
+	context.stroke(); 
+	
+	context.beginPath(); 
+	context.moveTo(150, 175); 
+	context.lineTo(130, 180); 
+	context.lineTo(150, 190); 
+	context.lineTo(150, 175); 
+	context.strokeStyle="#FF9F40"; 
+	context.fillStyle = "#FF9F40";
+	context.fill();
+	context.stroke();
+	
+	context.beginPath(); 
+	context.strokeStyle="black";
+	context.arc(150, 260, 4, 0, 2*Math.PI, true); 
+	context.fillStyle='black';
+	context.fill();
+	context.stroke(); 
+	
+	context.beginPath(); 
+	context.strokeStyle="black";
+	context.arc(150, 290, 4, 0, 2*Math.PI, true); 
+	context.fillStyle='black';
+	context.fill();
+	context.stroke(); 
+	
+	context.beginPath(); 
+	context.strokeStyle="black";
+	context.arc(150, 320, 4, 0, 2*Math.PI, true); 
+	context.fillStyle='black';
+	context.fill();
+	context.stroke(); 
+	
+	context.beginPath(); 
+	context.moveTo(223, 250); 
+	context.lineTo(270, 200); 
+	context.strokeStyle="#A6CDD0";
+	context.stroke(); 
+	
+	context.beginPath();
+	context.moveTo(77, 250);
+	context.lineTo(30, 200);
+	context.strokeStyle="#A6CDD0"; 
+	context.stroke(); 
+	
+	
+</script> 
+</body>
+</html>

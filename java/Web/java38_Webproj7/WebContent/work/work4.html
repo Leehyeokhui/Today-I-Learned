@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+function halfWindow(){
+	var w1 = window.open("http://www.naver.com", "", "_blank");
+	var width = screen.width*0.5;
+	var height =  screen.height*0.5;
+	w1.resizeTo(width, height);
+}
+
+function quaterWindow(){
+	var w1 = window.open("http://www.naver.com", "", "_blank");
+	var width = screen.width*0.25;
+	var height = screen.height*0.25;
+	w1.resizeTo(width, height);
+}
+</script>
+</head>
+<body>
+<button onclick="halfWindow();"> half-window</button>
+<button onclick="quaterWindow();"> quarter-window</button>
+</body>
+</html>
