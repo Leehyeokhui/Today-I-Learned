@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+function pr(msg, arr) {
+	document.write(msg + arr.toString() + "<br>");
+}
+</script>
+</head>
+<body>
+<h3>Array 객체의 메소드 활용</h3>
+<hr>
+<script>
+	var list = new Array();
+	var num;
+	
+	for(i = 0; i<7; i++){
+		num = prompt("정수를 입력하세요");
+		num = parseInt(num);
+		list[i] = num;
+	}
+	
+	var rev = list.reverse();
+	pr("역으로 출력 ",rev);
+	
+	var sortlist = list.sort();
+	pr("정렬하여 출력 ",sortlist);
+</script>
+</body>
+</html>

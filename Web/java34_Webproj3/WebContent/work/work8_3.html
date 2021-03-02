@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>프로토 타입 객체 생성</title>
+<script>
+	function book(writer, price, title) {
+		// 프로퍼티 만들기
+		this.writer = writer; 	// 계좌 주인 프로퍼티 만들기 
+		this.price = price; 		// 계좌 코드 프로퍼티 만들기 
+		this.title = title; // 잔액 프로퍼티 만들기 
+		
+		// 메소드 만들기
+		this.sales = function (num) {
+			this.price -= num;
+			return num;
+		}
+
+		this.checkwriter = function () {
+			return this.writer;
+		} 
+	}
+</script>
+</head>
+<body>
+<script>
+var book = new book("황기태",10000,"안녕");
+
+book.sales(1000);
+document.write("책 할인가격 : " + book.price + "<br>");
+document.write("책 저자 : " + book.checkwriter());
+
+</script>
+</body>
+</html>
