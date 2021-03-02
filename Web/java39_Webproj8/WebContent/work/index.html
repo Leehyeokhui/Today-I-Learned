@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>튜토리얼</title>
+</head>
+
+<body>
+    <h1>튜토리얼1 - 텍스트파일(이미지추가)</h1>
+    <button id="button1">태연 사계 가사</button>
+    <hr>
+    <div id="text1"></div>
+	<hr>
+	<h1>튜토리얼2 - xml파일</h1>
+    <button id="button2">xml파일 받아오기</button>
+    <hr>
+    <div id="text2"></div>
+	<hr>
+	<h1>튜토리얼3 - json파일</h1>
+    <button id="button3">json파일 받아오기</button>
+    <hr>
+    <div id="text3"></div>
+    <hr>
+    <h1>튜토리얼4 - 외부 API</h1>
+    <button id="button4">외부 API 데이터 받아오기</button>
+    <hr>
+    <div id="text4"></div>
+
+    <script>
+        // 버튼 이벤트 등록
+        document.getElementById('button1').addEventListener('click', requestLoadText1);
+
+        function requestLoadText1() {
+            // XMLHttpRequest 오브젝트 생성
+            var xhr = new XMLHttpRequest();
+
+            // 초기화
+            // Method : Http Request Method를 GET으로 설정
+            // URL : 서버상의 파일위치 설정
+            // Async : 비동기롤 설정(true는 비동기,  false는 동기
+            xhr.open('GET', 'plaintext.txt', true);
+
+            // 리퀘스트가 완료 이벤트 등록// Request finished. Do processing here.
+            xhr.onload = function () {
+                // ReadyState체크
+                // UNSENT : 초기화가 되지 않은 상태
+                // OPENED : 서버 통신이 시작인 안된 상태
+                // HEADERS_RECEIVED : 레스폰스 헤더를 받은 상태
+                // LOADING : 콘텐츠를 다운로드 중인 상태
+                // Done : 서버 통신이 종료된 상태
+                // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+                if (xhr.readyState != xhr.DONE) {
+                    return;
+                }
+
+                // Http에러 체크
+                // 200 - 성공
+                // 403 - "Forbidden"
+                // 404 - "Not Found"
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status 참고
+                if (this.status == 200) {
+                    document.getElementById('text1').innerHTML = this.responseText;
+                    return;
+                }
+
+                document.getElementById('text1').innerHTML = 'Http' + this.status + '에러가 발생 했습니다';
+
+            }
+
+            // 리퀘스트 에러 이벤트 등록
+            xhr.onerror = function () {
+                document.getElementById('text1').innerHTML = '에러가 발생 했습니다';
+            }
+
+            // 리퀘스트를 서버에게 요청
+            xhr.send();
+        }
+        
+        // 버튼 이벤트 등록
+        document.getElementById('button2').addEventListener('click', requestLoadText2);
+
+        function requestLoadText2() {
+            // XMLHttpRequest 오브젝트 생성
+            var xhr = new XMLHttpRequest();
+
+            // 초기화
+            // Method : Http Request Method를 GET으로 설정
+            // URL : 서버상의 파일위치 설정
+            // Async : 비동기롤 설정(true는 비동기,  false는 동기
+            xhr.open('GET', 'xmltext.xml', true);
+
+            // 리퀘스트 완료 이벤트 등록// Request finished. Do processing here.
+            xhr.onload = function () {
+                // ReadyState체크
+                // UNSENT : 초기화가 되지 않은 상태
+                // OPENED : 서버 통신이 시작인 안된 상태
+                // HEADERS_RECEIVED : 레스폰스 헤더를 받은 상태
+                // LOADING : 콘텐츠를 다운로드 중인 상태
+                // Done : 서버 통신이 종료된 상태
+                // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+                if (xhr.readyState != xhr.DONE) {
+                    return;
+                }
+
+                // Http에러 체크
+                // 200 - 성공
+                // 403 - "Forbidden"
+                // 404 - "Not Found"
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status 참고
+                if (this.status == 200) {
+                    document.getElementById("text2").innerHTML = createTable2(xhr.responseXML);
+                    return;
+                }
+
+                document.getElementById('text2').innerHTML = 'Http' + this.status + '에러가 발생 했습니다';
+
+            }
+
+            // 리퀘스트 에러 이벤트 등록
+            xhr.onerror = function () {
+                document.getElementById('text2').innerHTML = '에러가 발생 했습니다';
+            }
+
+            // 리퀘스트를 서버에게 요청
+            xhr.send();
+        }
+
+        function createTable2(xml) {
+            var studentXmls = xml.getElementsByTagName("STUDENT");
+            var table = "<table>"
+                + "<tr>"
+                + "<th>" + "아이디" + "</th>"
+                + "<th>" + "이름" + "</th>"
+                + "<th>" + "학년" + "</th>"
+                + "<th>" + "이메일" + "</th>"
+                + "</tr>";
+
+            for (var i = 0; i < studentXmls.length; i++) {
+                var studentXml = studentXmls[i];
+                table += "<tr>"
+                    + "<td>"
+                    + studentXml.getElementsByTagName("ID")[0].childNodes[0].nodeValue
+                    + "</td>"
+                    + "<td>"
+                    + studentXml.getElementsByTagName("NAME")[0].childNodes[0].nodeValue
+                    + "</td>"
+                    + "<td>"
+                    + studentXml.getElementsByTagName("GRADE")[0].childNodes[0].nodeValue
+                    + "</td>"
+                    + "<td>"
+                    + studentXml.getElementsByTagName("EMAIL")[0].childNodes[0].nodeValue
+                    + "</td>"
+                    + "</tr>";
+            }
+
+            table += "</table>";
+            return table;
+        }
+        
+     // 버튼 이벤트 등록
+        document.getElementById('button3').addEventListener('click', requestLoadText3);
+
+        function requestLoadText3() {
+            // XMLHttpRequest 오브젝트 생성
+            var xhr = new XMLHttpRequest();
+
+            // 초기화
+            // Method : Http Request Method를 GET으로 설정
+            // URL : 서버상의 파일위치 설정
+            // Async : 비동기롤 설정(true는 비동기,  false는 동기
+            xhr.open('GET', 'jsontext.json', true);
+
+            // 리퀘스트가 완료 이벤트 등록// Request finished. Do processing here.
+            xhr.onload = function () {
+                // ReadyState체크
+                // UNSENT : 초기화가 되지 않은 상태
+                // OPENED : 서버 통신이 시작인 안된 상태
+                // HEADERS_RECEIVED : 레스폰스 헤더를 받은 상태
+                // LOADING : 콘텐츠를 다운로드 중인 상태
+                // Done : 서버 통신이 종료된 상태
+                // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+                if (xhr.readyState != xhr.DONE) {
+                    return;
+                }
+
+                // Http에러 체크
+                // 200 - 성공
+                // 403 - "Forbidden"
+                // 404 - "Not Found"
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status 참고
+                if (this.status == 200) {
+                    document.getElementById("text3").innerHTML = createTable3(this.responseText);
+                    return;
+                }
+
+                document.getElementById('text3').innerHTML = 'Http' + this.status + '에러가 발생 했습니다';
+
+            }
+
+            // 리퀘스트 에러 이벤트 등록
+            xhr.onerror = function () {
+                document.getElementById('text3').innerHTML = '에러가 발생 했습니다';
+            }
+
+            // 리퀘스트를 서버에게 요청
+            xhr.send();
+        }
+
+        function createTable3(jsonText) {
+            var contents = JSON.parse(jsonText);
+            var table = "<table>"
+                + "<tr>"
+                + "<th>" + "Value" + "</th>"
+                + "<th>" + "State" + "</th>"
+                + "<th>" + "Description" + "</th>"
+                + "</tr>";
+
+            for (var i = 0; i < contents.length; i++) {
+                var content = contents[i];
+                table += "<tr>"
+                    + "<td>"
+                    + content.Value
+                    + "</td>"
+                    + "<td>"
+                    + content.State
+                    + "</td>"
+                    + "<td>"
+                    + content.Description
+                    + "</td>"
+                    + "</tr>";
+            }
+
+            table += "</table>";
+            return table;
+        }
+        
+     // 버튼 이벤트 등록
+        document.getElementById('button4').addEventListener('click', requestLoadText4);
+
+        function requestLoadText4() {
+            // XMLHttpRequest 오브젝트 생성
+            var xhr = new XMLHttpRequest();
+
+            // 초기화
+            // Method : Http Request Method를 GET으로 설정
+            // URL : 서버상의 파일위치 설정
+            // Async : 비동기롤 설정(true는 비동기,  false는 동기
+            xhr.open('GET', 'https://api.github.com/users', true);
+
+            // 리퀘스트가 완료 이벤트 등록// Request finished. Do processing here.
+            xhr.onload = function () {
+                // ReadyState체크
+                // UNSENT : 초기화가 되지 않은 상태
+                // OPENED : 서버 통신이 시작인 안된 상태
+                // HEADERS_RECEIVED : 레스폰스 헤더를 받은 상태
+                // LOADING : 콘텐츠를 다운로드 중인 상태
+                // Done : 서버 통신이 종료된 상태
+                // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+                if (xhr.readyState != xhr.DONE) {
+                    return;
+                }
+
+                // Http에러 체크
+                // 200 - 성공
+                // 403 - "Forbidden"
+                // 404 - "Not Found"
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status 참고
+                if (this.status == 200) {
+                    document.getElementById("text4").innerHTML = createTable4(this.responseText);
+                    return;
+                }
+
+                document.getElementById('text4').innerHTML = 'Http' + this.status + '에러가 발생 했습니다';
+
+            }
+
+            // 리퀘스트 에러 이벤트 등록
+            xhr.onerror = function () {
+                document.getElementById('text4').innerHTML = '에러가 발생 했습니다';
+            }
+
+            // 리퀘스트를 서버에게 요청
+            xhr.send();
+        }
+
+        function createTable4(jsonText) {
+            var users = JSON.parse(jsonText);
+            var table = "<table>"
+                + "<tr>"
+                + "<th>" + "id" + "</th>"
+                + "<th>" + "node_id" + "</th>"
+                + "<th>" + "avatar_url" + "</th>"
+                + "<th>" + "url" + "</th>"
+                + "<th>" + "html_url" + "</th>"
+                + "</tr>";
+
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
+                table += "<tr>"
+                    + "<td>"
+                    + user.id
+                    + "</td>"
+                    + "<td>"
+                    + user.node_id
+                    + "</td>"
+                    + "<td>"
+                    + user.avatar_url
+                    + "</td>"
+                    + "<td>"
+                    + user.url
+                    + "</td>"
+                    + "<td>"
+                    + user.html_url
+                    + "</td>"
+                    + "</tr>";
+            }
+
+            table += "</table>";
+            return table;
+        }
+    </script>
+</body>
+
+</html>
