@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>계산기</title>
+<style>
+* {
+    color: white;   
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+ 
+#container > div {
+  border: 3px solid gray;
+}
+ 
+#display,
+#result {
+  width: 386.5px;
+  height: 80px;
+  font-size: 60px;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 8px;
+  background: #56A902;
+}
+ 
+.buttonWrap {
+  display: flex;
+  flex-direction: row;
+}
+ 
+.buttonWrap button {
+  width: 100px;
+  height: 80px;
+  font-size: 30px;
+  padding: 10px;
+  background: #75D701;
+}
+
+button:last-child {
+    background-color: #3B4E32;
+}
+</style>
+<script>
+function addOutput(num) {
+	  var display = document.getElementById("display");
+	  display.value = display.value + num;
+}
+	 
+function calculate() {
+	  var display = document.getElementById("display");
+	  var result = eval(display.value);
+	  var displayResult = document.getElementById("result");
+	  displayResult.value = result;
+}
+	 
+function reset() {
+	  var display = document.getElementById("display");
+	  display.value = "";
+	  var displayResult = document.getElementById("result");
+	  displayResult.value = "";
+}
+</script>
+</head>
+<body>
+<div id="container">
+      <div>
+        <div>
+          <input id="display" type="text" />
+        </div>
+        <div>
+          <input id="result" type="text" />
+        </div>
+ 
+        <div>
+          <div class="buttonWrap">
+            <button style="width:300px" onclick="reset()">AC</button>
+            <button onclick="addOutput('/')">/</button>
+          </div>
+          <div class="buttonWrap">
+            <button onclick="addOutput(7)">7</button>
+            <button onclick="addOutput(8)">8</button>
+            <button onclick="addOutput(9)">9</button>
+            <button onclick="addOutput('*')">*</button>
+          </div>
+          <div class="buttonWrap">
+            <button onclick="addOutput(4)">4</button>
+            <button onclick="addOutput(5)">5</button>
+            <button onclick="addOutput(6)">6</button>
+            <button onclick="addOutput('+')">+</button>
+          </div>
+          <div class="buttonWrap">
+            <button onclick="addOutput(1)">1</button>
+            <button onclick="addOutput(2)">2</button>
+            <button onclick="addOutput(3)">3</button>
+            <button onclick="addOutput('-')">-</button>
+          </div>
+          <div class="buttonWrap">
+            <button style="width:200px" onclick="addOutput(0)">0</button>
+            <button onclick="addOutput('.')">.</button>
+            <button style=background-color:#75D701 onclick="calculate()">=</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
