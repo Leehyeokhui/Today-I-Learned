@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>css 스타일 응용</title>
+<style>
+div.box{
+	border : 3px dashed blue; 
+	border-color : Cyan; 
+	border-radius : 50px;
+	box-shadow : 10px 10px 5px skyBlue; 
+	
+	width : 200px; 
+	height : 200px; 
+	margin : 40px; 
+	border-width : 30px;
+	padding : 20px;
+	
+	font : normal 30px verdana; 
+	text-shadow : 3px 3px Indigo; 
+	
+	background-image : url("image/son.jpg");
+	
+	cursor : progress;
+}
+</style>
+<script>
+function best(obj, txt){
+	var p = obj.parentElement;
+	var newDIV = document.createElement("div");
+	var tmp = document.getElementById("bu");
+	newDIV.innerHTML = txt;
+	newDIV.setAttribute("id", "myDiv");
+	p.appendChild(newDIV);
+	newDIV.onclick = function() {
+		var p = this.parentElement;
+		p.removeChild(this);
+		tmp.style.visibility = 'visible';
+	};
+	tmp.style.visibility = 'hidden';
+}
+
+function changeImage() {
+	var sel = document.getElementById("sel");
+	var img = document.getElementById("myImg");
+	img.onload = function () {
+	 	document.getElementById("mySpan").innerHTML = img.width + "x" + img.height;
+	}
+	var index= sel.selectedIndex;
+	img.src = sel.options[index].value; 
+}
+</script>
+</head>
+<body onload="changeImage()">
+<h3>Son fan page</h3>
+<div class = "box" id="di">
+	<br>
+	<button id = "bu" onclick="best(this,'Sonny가 최고야')">Sonny가 최고야</button>
+</div>
+<hr>
+<h3>세레모니 사진집</h3>
+<form>
+<select id="sel" onchange="changeImage()">
+	<option value="image/son1.jpg">찰칵
+	<option value="image/son2.jpg">골!
+	<option value="image/son3.jpg">하트
+</select>
+</form>
+<p><img id="myImg" src="image/son1.jpg" alt="."></p>
+사이즈 : <span id="mySpan">이미지 크기</span>
+</body>
+</html>

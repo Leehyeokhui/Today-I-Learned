@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>setTimeout()으로 웹 페이지 자동 연결</title>
+</head>
+<body>
+<h3>setTimeout()</h3>
+<hr>
+생각하는 시간(5초) <input type="button" value="Start" onclick="startTimer()"><br>
+<hr>
+<img id="img1" style="visibility:hidden" src="image/on.jpg">
+<p id="pi" style="visibility:hidden">5초가 경과했습니다!</p>
+<script>
+function startTimer() {
+	document.images[0].style.visibility="visible";
+	setTimeout(myTimer,5000);
+}
+
+function myTimer(){
+	document.images[0].style.visibility="hidden";
+	document.getElementById("pi").style.visibility="visible";
+}
+
+</script>
+</body>
+</html>
