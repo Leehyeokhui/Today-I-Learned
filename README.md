@@ -5,4 +5,4 @@
 2. sql 기초
 3. java와 sql 연동(오라클)
 4. Web programming(jsp, html, javascript, Ajax, Vue)
-5. Web programming(bean, ioc, MVC)
+5. Web programming(bean, ioc, MVC, jstl)
